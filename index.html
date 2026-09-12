@@ -3,43 +3,43 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>잠바 눈치게임</title>
+<title>패딩 눈치게임</title>
 <style>
   :root{
-    --bg:#EAEDF0;
+    --bg:#EEF1F6;
     --surface:#FFFFFF;
-    --surface-alt:#DCE2E8;
-    --border:#C9D0D6;
-    --ink:#1C232B;
-    --ink-muted:#5C6773;
-    --ink-faint:#8A929B;
-    --accent:#D9663D;
-    --accent-strong:#B84E29;
-    --accent-soft:#F3D9C9;
-    --focus:#2F6FA0;
-    --shadow:0 1px 2px rgba(28,35,43,.07),0 4px 14px rgba(28,35,43,.06);
-    --lvl1:#E2703A;--lvl2:#DD8B4C;--lvl3:#C7A24F;--lvl4:#8FAEB0;--lvl5:#5C93B5;--lvl6:#3E6690;
-    --feel-cold:#4472A6;--feel-ok:#4C8C6B;--feel-hot:#D9663D;
+    --surface-alt:#E4E9F1;
+    --border:#CDD5E1;
+    --ink:#1B2233;
+    --ink-muted:#5B6478;
+    --ink-faint:#8991A3;
+    --accent:#D98C2B;
+    --accent-strong:#B06F1C;
+    --accent-soft:#F6E4C2;
+    --focus:#2E7D8C;
+    --shadow:0 1px 2px rgba(27,34,51,.07),0 4px 14px rgba(27,34,51,.06);
+    --lvl1:#E8946B;--lvl2:#E0A85E;--lvl3:#C9AD5A;--lvl4:#7FAEAA;--lvl5:#4F8FA6;--lvl6:#33607D;
+    --feel-cold:#3E72A6;--feel-ok:#4C8C6B;--feel-hot:#D9663D;
     --font-display:'Jua','Noto Sans KR',sans-serif;
     --font-body:'IBM Plex Sans KR','Noto Sans KR',sans-serif;
     color-scheme:light;
   }
   @media (prefers-color-scheme:dark){
     :root:not([data-theme="light"]){
-      --bg:#14181D;--surface:#1D232A;--surface-alt:#262E36;--border:#333D47;
-      --ink:#ECEFF2;--ink-muted:#A9B2BC;--ink-faint:#737E89;
-      --accent:#E88355;--accent-strong:#F0A379;--accent-soft:#3B2A22;--focus:#6AA9D9;
+      --bg:#161B24;--surface:#1E2530;--surface-alt:#282F3D;--border:#38414F;
+      --ink:#EDF0F5;--ink-muted:#ABB3C2;--ink-faint:#78829A;
+      --accent:#E8A857;--accent-strong:#F0BE7E;--accent-soft:#3A2E1C;--focus:#5FB4C2;
       --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 22px rgba(0,0,0,.4);
-      --lvl1:#E2703A;--lvl2:#DD8B4C;--lvl3:#C7A24F;--lvl4:#7FA3A8;--lvl5:#5C93B5;--lvl6:#6C8FB8;
+      --lvl1:#E8946B;--lvl2:#E0A85E;--lvl3:#C9AD5A;--lvl4:#6E9C98;--lvl5:#4F8FA6;--lvl6:#5A85A8;
       color-scheme:dark;
     }
   }
   :root[data-theme="dark"]{
-    --bg:#14181D;--surface:#1D232A;--surface-alt:#262E36;--border:#333D47;
-    --ink:#ECEFF2;--ink-muted:#A9B2BC;--ink-faint:#737E89;
-    --accent:#E88355;--accent-strong:#F0A379;--accent-soft:#3B2A22;--focus:#6AA9D9;
+    --bg:#161B24;--surface:#1E2530;--surface-alt:#282F3D;--border:#38414F;
+    --ink:#EDF0F5;--ink-muted:#ABB3C2;--ink-faint:#78829A;
+    --accent:#E8A857;--accent-strong:#F0BE7E;--accent-soft:#3A2E1C;--focus:#5FB4C2;
     --shadow:0 1px 2px rgba(0,0,0,.35),0 8px 22px rgba(0,0,0,.4);
-    --lvl1:#E2703A;--lvl2:#DD8B4C;--lvl3:#C7A24F;--lvl4:#7FA3A8;--lvl5:#5C93B5;--lvl6:#6C8FB8;
+    --lvl1:#E8946B;--lvl2:#E0A85E;--lvl3:#C9AD5A;--lvl4:#6E9C98;--lvl5:#4F8FA6;--lvl6:#5A85A8;
     color-scheme:dark;
   }
   *{box-sizing:border-box;}
@@ -53,7 +53,7 @@
   h1,h2,h3{font-family:var(--font-display);font-weight:400;text-wrap:balance;margin:0;}
   p{margin:0;}
   button{font-family:inherit;}
-  .wrap{max-width:560px;margin:0 auto;padding:20px 16px calc(48px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:18px;}
+  .wrap{max-width:560px;margin:0 auto;padding:12px 14px calc(14px + env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:8px;}
 
   /* ---------- Onboarding ---------- */
   .onboarding{display:flex;justify-content:center;padding-top:8px;}
@@ -90,71 +90,89 @@
   .link-btn{background:none;border:none;color:var(--ink-muted);font-size:13.5px;cursor:pointer;padding:6px 4px;text-decoration:underline;text-underline-offset:3px;}
 
   /* ---------- Main layout ---------- */
-  .app-header{display:flex;align-items:center;justify-content:space-between;gap:10px;}
-  .brand{display:flex;align-items:center;gap:9px;}
-  .brand-icon{width:30px;height:30px;color:var(--accent);flex:none;}
-  .brand h1{font-size:21px;}
-  .date-line{font-size:12.5px;color:var(--ink-faint);margin-top:2px;}
+  .app-header{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;}
+  .brand{display:flex;align-items:center;gap:8px;}
+  .brand-icon{width:24px;height:24px;color:var(--accent);flex:none;}
+  .brand h1{font-size:19px;}
+  .header-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;padding-top:2px;}
+  .date-line{font-size:12px;color:var(--ink-faint);margin:0;}
+  .header-right .link-btn{padding:0;font-size:12px;}
 
-  .card{background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:16px 16px 18px;box-shadow:var(--shadow);}
-  .card h2{font-size:15.5px;font-family:var(--font-body);font-weight:700;margin-bottom:2px;}
-
-  .term-banner{display:flex;gap:12px;align-items:flex-start;background:var(--surface);border:1px solid var(--border);border-radius:18px;padding:14px 16px;box-shadow:var(--shadow);}
-  .term-icon{font-size:26px;line-height:1;flex:none;margin-top:1px;}
-  .term-name{font-family:var(--font-display);font-size:17px;}
-  .term-name b{color:var(--accent-strong);}
-  .term-desc{font-size:13px;color:var(--ink-muted);margin-top:3px;line-height:1.5;}
-  .term-next{font-size:12px;color:var(--ink-faint);margin-top:6px;}
-
-  .region-row{display:flex;align-items:center;gap:10px;}
-  .region-row label{font-size:13.5px;color:var(--ink-muted);flex:none;}
-
-  .persona-row{display:flex;flex-wrap:wrap;gap:7px;align-items:center;}
-  .chip{font-size:12px;background:var(--surface-alt);border:1px solid var(--border);border-radius:999px;padding:5px 10px;color:var(--ink-muted);}
-
-  .pick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:12px;}
-  .pick-btn{
-    display:flex;flex-direction:column;align-items:center;gap:6px;
-    background:var(--surface-alt);border:1.5px solid var(--border);border-radius:14px;
-    padding:12px 6px 10px;cursor:pointer;transition:.15s;color:var(--ink);
+  .today-strip{
+    display:flex;align-items:center;gap:6px;background:var(--surface);border:1px solid var(--border);
+    border-radius:12px;padding:8px 12px;box-shadow:var(--shadow);font-size:12px;
+    white-space:nowrap;overflow:hidden;
   }
-  .pick-btn svg{width:28px;height:28px;}
-  .pick-btn span{font-size:12px;line-height:1.3;text-align:center;}
+  .today-strip-location{color:var(--ink);font-weight:600;flex:none;}
+  .today-strip-dot{color:var(--ink-faint);flex:none;}
+  .today-strip-date{color:var(--ink-muted);flex:none;}
+  .today-strip-icon{flex:none;font-size:14px;line-height:1;}
+  .today-strip-text{color:var(--ink-muted);flex:none;}
+  .today-strip-reco{color:var(--ink-muted);flex:none;font-size:11px;font-style:italic;}
+
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:10px 14px 11px;box-shadow:var(--shadow);}
+  .card h2{font-size:14px;font-family:var(--font-body);font-weight:700;margin-bottom:1px;}
+
+  .term-banner{display:flex;gap:8px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:8px 13px;box-shadow:var(--shadow);}
+  .term-icon{font-size:18px;line-height:1;flex:none;}
+  .term-single{font-family:var(--font-display);font-size:12.5px;color:var(--ink-muted);line-height:1.4;margin:0;}
+
+  .header-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .region-select-inline{display:flex;align-items:center;gap:6px;flex:none;}
+  .region-select-inline label{font-size:12px;color:var(--ink);flex:none;font-weight:700;}
+  .region-select-inline select{padding:6px 8px;border-radius:8px;border:1px solid var(--border);background:var(--surface-alt);color:var(--ink);font-size:12px;width:auto;}
+
+  .filter-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+  .filter-checkbox{display:flex;align-items:center;gap:4px;cursor:pointer;font-size:12px;}
+  .filter-checkbox input[type="checkbox"]{cursor:pointer;margin:0;}
+  .filter-checkbox label{cursor:pointer;margin:0;}
+
+  .persona-row{display:flex;gap:6px;align-items:center;flex-wrap:wrap;}
+  .chip{font-size:12px;background:var(--surface-alt);border:1px solid var(--border);border-radius:999px;padding:6px 11px;color:var(--ink-muted);flex:none;}
+
+  .pick-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:9px;}
+  .pick-btn{
+    display:flex;flex-direction:column;align-items:center;gap:4px;
+    background:var(--surface-alt);border:1.5px solid var(--border);border-radius:12px;
+    padding:9px 6px 8px;cursor:pointer;transition:.15s;color:var(--ink);
+  }
+  .pick-btn svg{width:24px;height:24px;}
+  .pick-btn span{font-size:11.5px;line-height:1.25;text-align:center;}
   .pick-btn:hover{border-color:var(--pick-color,var(--accent));}
   .pick-btn.active{background:color-mix(in srgb, var(--pick-color,var(--accent)) 16%, var(--surface));border-color:var(--pick-color,var(--accent));}
   .pick-btn.active svg{color:var(--pick-color,var(--accent));}
   .pick-btn:not(.active) svg{color:var(--ink-muted);}
 
-  .feeling-section{display:flex;flex-direction:column;gap:9px;background:var(--surface);border:1px solid var(--border);border-radius:16px;padding:13px 15px;box-shadow:var(--shadow);}
+  .feeling-section{display:flex;flex-direction:column;gap:6px;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:8px 13px;box-shadow:var(--shadow);}
   .feeling-row{display:flex;gap:8px;}
-  .feel-btn{flex:1;padding:9px 4px;border-radius:11px;border:1.5px solid var(--border);background:var(--surface-alt);color:var(--ink);font-size:13px;cursor:pointer;}
+  .feel-btn{flex:1;padding:7px 4px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface-alt);color:var(--ink);font-size:12px;cursor:pointer;}
   .feel-btn.active[data-feel="cold"]{background:var(--feel-cold);border-color:var(--feel-cold);color:#fff;}
   .feel-btn.active[data-feel="ok"]{background:var(--feel-ok);border-color:var(--feel-ok);color:#fff;}
   .feel-btn.active[data-feel="hot"]{background:var(--feel-hot);border-color:var(--feel-hot);color:#fff;}
 
-  .suggestion-banner{background:var(--accent-soft);border:1px solid var(--accent);border-radius:16px;padding:13px 15px;display:flex;flex-direction:column;gap:9px;}
-  .suggestion-banner p{font-size:13.5px;line-height:1.55;color:var(--ink);}
+  .suggestion-banner{background:var(--accent-soft);border:1px solid var(--accent);border-radius:14px;padding:10px 13px;display:flex;flex-direction:column;gap:7px;}
+  .suggestion-banner p{font-size:13px;line-height:1.5;color:var(--ink);}
   .suggestion-actions{display:flex;gap:8px;}
-  .suggestion-actions button{flex:1;padding:9px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface);font-size:13px;cursor:pointer;color:var(--ink);}
+  .suggestion-actions button{flex:1;padding:8px;border-radius:10px;border:1.5px solid var(--border);background:var(--surface);font-size:12.5px;cursor:pointer;color:var(--ink);}
   .suggestion-actions .accept{background:var(--accent);border-color:var(--accent);color:#fff;font-weight:700;}
 
-  .stats-meta{font-size:12.5px;color:var(--ink-muted);margin-bottom:10px;line-height:1.5;}
-  .stack-bar{display:flex;width:100%;height:20px;border-radius:999px;overflow:hidden;background:var(--surface-alt);border:1px solid var(--border);}
+  .stats-meta{font-size:11.5px;color:var(--ink-muted);margin-bottom:6px;line-height:1.4;}
+  .stack-bar{display:flex;width:100%;height:16px;border-radius:999px;overflow:hidden;background:var(--surface-alt);border:1px solid var(--border);}
   .stack-seg{height:100%;transition:.25s;}
-  .legend-list{list-style:none;margin:12px 0 0;padding:0;display:flex;flex-direction:column;gap:7px;}
-  .legend-list li{display:flex;align-items:center;gap:9px;font-size:13px;}
-  .legend-swatch{width:11px;height:11px;border-radius:3px;flex:none;}
+  .legend-list{list-style:none;margin:7px 0 0;padding:0;display:flex;flex-direction:column;gap:4px;}
+  .legend-list li{display:flex;align-items:center;gap:9px;font-size:12.5px;}
+  .legend-swatch{width:10px;height:10px;border-radius:3px;flex:none;}
   .legend-label{flex:1;color:var(--ink);}
   .legend-pct{font-variant-numeric:tabular-nums;font-weight:700;color:var(--ink);}
-  .legend-count{color:var(--ink-faint);font-size:12px;font-variant-numeric:tabular-nums;}
-  .empty-note{font-size:13px;color:var(--ink-muted);line-height:1.6;padding:6px 2px;}
+  .legend-count{color:var(--ink-faint);font-size:11.5px;font-variant-numeric:tabular-nums;}
+  .empty-note{font-size:12.5px;color:var(--ink-muted);line-height:1.55;padding:4px 2px;}
 
-  .trend-wrap{margin-top:6px;}
+  .trend-wrap{margin-top:0;}
   #trend-chart{width:100%;height:auto;display:block;overflow:visible;}
-  .trend-empty{font-size:13px;color:var(--ink-muted);padding:10px 2px 2px;}
+  .trend-empty{font-size:12.5px;color:var(--ink-muted);padding:8px 2px 2px;}
 
-  .app-footer{text-align:center;padding-top:6px;}
-  .app-footer p{font-size:12px;color:var(--ink-faint);}
+  .app-footer{text-align:center;padding-top:2px;}
+  .app-footer p{font-size:11px;color:var(--ink-faint);}
 
   [hidden]{display:none!important;}
 
@@ -224,23 +242,25 @@
         <span class="brand-icon" aria-hidden="true">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3.5 5 6v3l1.5-.6V20h11V8.4L19 9V6l-3-2.5" /><path d="M8 3.5c0 2 1.7 3 4 3s4-1 4-3" /></svg>
         </span>
-        <div>
-          <h1>잠바 눈치게임</h1>
-          <p class="date-line" id="date-line"></p>
-        </div>
+        <h1>패딩 눈치게임</h1>
       </div>
-      <button type="button" class="link-btn" id="edit-persona">내 설정</button>
+      <div class="header-right">
+        <p class="date-line" id="date-line"></p>
+        <button type="button" class="link-btn" id="edit-persona">내 설정</button>
+      </div>
     </header>
 
-    <section class="term-banner" id="term-banner"></section>
-
-    <section class="card">
-      <div class="region-row">
-        <label for="region-select">지역</label>
-        <select id="region-select" aria-label="지역 선택"></select>
-      </div>
-      <div class="persona-row" id="persona-chips" style="margin-top:10px;"></div>
+    <section class="today-strip" id="today-strip" hidden>
+      <span class="today-strip-location" id="weather-location"></span>
+      <span class="today-strip-dot">|</span>
+      <span class="today-strip-date" id="weather-date"></span>
+      <span class="today-strip-dot">|</span>
+      <span class="today-strip-icon" id="weather-icon" aria-hidden="true">🌡️</span>
+      <span class="today-strip-text" id="weather-text"></span>
+      <span class="today-strip-reco" id="weather-reco"></span>
     </section>
+
+    <section class="term-banner" id="term-banner"></section>
 
     <section class="card">
       <h2>오늘 뭐 입으셨어요?</h2>
@@ -266,18 +286,27 @@
 
     <section class="card">
       <h2>오늘, 나와 비슷한 사람들</h2>
+      <div class="header-row" style="margin-bottom: 8px;">
+        <p style="font-size:12px;color:var(--ink-muted);margin:0;">
+          <span id="region-display-name"></span>
+        </p>
+        <p style="font-size:11px;color:var(--ink-faint);margin:4px 0 0;font-style:italic;">
+          ☑️ 필터를 체크하면 자동으로 로드됩니다
+        </p>
+      </div>
+      <div class="filter-row" id="filter-row"></div>
       <p class="stats-meta" id="stats-meta"></p>
       <div id="stats-body"></div>
     </section>
 
     <section class="card trend-wrap">
-      <h2>최근 7일 추이</h2>
-      <p class="stats-meta" id="trend-meta">이 지역에서 두꺼운 옷(패딩·코트)을 입은 비율이에요</p>
+      <h2>지난 7일 날씨</h2>
+      <p class="stats-meta" id="trend-meta">이 지역의 7일간 최고·최저 기온과 날씨예요</p>
       <div id="trend-body"></div>
     </section>
 
     <footer class="app-footer">
-      <p>이 앱은 사장님과 함께 자라는 중이에요 · v1 · <span id="mode-label"></span></p>
+      <p>이 앱은 사장님과 함께 자라는 중이에요 · v5 · <span id="mode-label"></span></p>
     </footer>
   </main>
 </div>
@@ -291,7 +320,28 @@
   var REGIONS = ["서울","인천","안성","수원","대전","대구","부산","광주","울산","세종",
     "강원","충북","충남","전북","전남","경북","경남","제주"];
 
-  // 2026년 24절기 (기상청 기준 근사 날짜). 월-일 문자열로 비교해 "오늘의 절기"를 계산한다.
+  var REGION_COORDS = {
+    "서울":[37.5665,126.9780], "인천":[37.4563,126.7052], "안성":[37.0079,127.2793],
+    "수원":[37.2636,127.0286], "대전":[36.3504,127.3845], "대구":[35.8714,128.6014],
+    "부산":[35.1796,129.0756], "광주":[35.1595,126.8526], "울산":[35.5384,129.3114],
+    "세종":[36.4801,127.2890], "강원":[37.8813,127.7298], "충북":[36.6424,127.4890],
+    "충남":[36.6014,126.6608], "전북":[35.8242,127.1480], "전남":[34.9906,126.4816],
+    "경북":[36.5684,128.7294], "경남":[35.2280,128.6811], "제주":[33.4996,126.5312]
+  };
+
+  var WEATHER_CODE_MAP = {
+    0:["맑음","☀️"], 1:["대체로 맑음","🌤️"], 2:["구름 조금","⛅"], 3:["흐림","☁️"],
+    45:["안개","🌫️"], 48:["안개","🌫️"],
+    51:["이슬비","🌦️"], 53:["이슬비","🌦️"], 55:["이슬비","🌦️"],
+    56:["언 이슬비","🌧️"], 57:["언 이슬비","🌧️"],
+    61:["비","🌧️"], 63:["비","🌧️"], 65:["강한 비","🌧️"],
+    66:["언 비","🌧️"], 67:["언 비","🌧️"],
+    71:["눈","❄️"], 73:["눈","❄️"], 75:["강한 눈","❄️"], 77:["싸락눈","🌨️"],
+    80:["소나기","🌦️"], 81:["소나기","🌦️"], 82:["강한 소나기","🌧️"],
+    85:["소나기눈","🌨️"], 86:["소나기눈","🌨️"],
+    95:["뇌우","⛈️"], 96:["우박 동반 뇌우","⛈️"], 99:["우박 동반 뇌우","⛈️"]
+  };
+
   var SOLAR_TERMS = [
     {md:"01-05", name:"소한", desc:"작은 추위, 한 해 중 추위가 시작되는 절기예요.", icon:"❄️"},
     {md:"01-20", name:"대한", desc:"큰 추위, 일 년 중 가장 추운 시기예요.", icon:"🥶"},
@@ -319,7 +369,6 @@
     {md:"12-22", name:"동지", desc:"일 년 중 밤이 가장 긴 날이에요.", icon:"🌑"}
   ];
 
-  // 옷 카테고리: level이 낮을수록 얇음(따뜻한 날씨), 높을수록 두꺼움(추운 날씨)
   var CATEGORIES = [
     {id:"tshirt", label:"반팔·민소매", level:1, color:"var(--lvl1)",
       icon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M9 4 4 6.5V11l2-.7V19h12v-8.7l2 .7V6.5L15 4c-.4 1.6-1.7 2.5-3 2.5S9.4 5.6 9 4Z"/></svg>'},
@@ -342,13 +391,12 @@
 
   function pad(n){ return n<10 ? "0"+n : ""+n; }
 
-  // 사용자 기기 시간대와 상관없이 한국(Asia/Seoul) 기준 날짜를 씀 — 지역 커뮤니티 통계이므로
   function kstParts(offsetDays){
     offsetDays = offsetDays || 0;
     var now = new Date(Date.now() + offsetDays*86400000);
     var fmt = new Intl.DateTimeFormat("en-CA",{timeZone:"Asia/Seoul",year:"numeric",month:"2-digit",day:"2-digit"});
     var parts = fmt.formatToParts(now).reduce(function(acc,p){ acc[p.type]=p.value; return acc; },{});
-    return parts; // {year, month, day}
+    return parts;
   }
   function kstDateStr(offsetDays){
     var p = kstParts(offsetDays);
@@ -378,7 +426,6 @@
     for (var j=0;j<SOLAR_TERMS.length;j++){
       if (SOLAR_TERMS[j].md > md) { next = SOLAR_TERMS[j]; break; }
     }
-    // 오늘부터 다음 절기까지 며칠 남았는지 (연도 경계 넘어가는 경우 포함)
     var todayP = kstParts(0);
     var y = parseInt(todayP.year,10);
     var todayDate = new Date(y, parseInt(todayP.month,10)-1, parseInt(todayP.day,10));
@@ -404,7 +451,10 @@
     return null;
   }
 
-  /* ======================= 저장소 어댑터 (real db 또는 localStorage 폴백) ======================= */
+  /* ======================= SheetDB API 설정 ======================= */
+  var SHEETDB_API_URL = "https://sheetdb.io/api/v1/npp55pnx1owyk";
+
+  /* ======================= 저장소 어댑터 ======================= */
 
   function createLocalAdapter(){
     var PICKS_KEY = "jamba_local_picks_v1";
@@ -431,7 +481,88 @@
         var all = readPicks();
         return all.filter(function(p){ return p.region===region && dates.indexOf(p.date)>=0; });
       },
-      // 로컬 모드에서는 실시간 구독이 없으므로 즉시 1회 콜백하고 빈 unsubscribe 반환
+      watchPicks(region, date, cb){
+        this.queryPicks(region, [date]).then(cb);
+        return function(){};
+      }
+    };
+  }
+
+  function createSheetDBAdapter(){
+    var LOCAL_CACHE_KEY = "jamba_sheets_persona_cache_v1";
+    var TIMEOUT_MS = 4000;
+
+    function reqWithTimeout(url, opts){
+      opts = opts || {};
+      var controller = new AbortController();
+      var timer = setTimeout(function(){ controller.abort(); }, TIMEOUT_MS);
+      opts.signal = controller.signal;
+      return fetch(url, opts).finally(function(){ clearTimeout(timer); });
+    }
+
+    async function upsert(sheet, keyCol, keyVal, payload){
+      var patchUrl = SHEETDB_API_URL + "/" + keyCol + "/" + encodeURIComponent(keyVal) + "?sheet=" + sheet;
+      try {
+        var resp = await reqWithTimeout(patchUrl, {
+          method: "PATCH",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({data: payload})
+        });
+        var result = await resp.json();
+        if (result && result.updated) return;
+      } catch (e) { }
+      try {
+        await reqWithTimeout(SHEETDB_API_URL + "?sheet=" + sheet, {
+          method: "POST",
+          headers: {"Content-Type": "application/json"},
+          body: JSON.stringify({data: [payload]})
+        });
+      } catch (e) { }
+    }
+
+    return {
+      mode: "sheetdb",
+      async getPersona(deviceId){
+        try {
+          var url = SHEETDB_API_URL + "/search?deviceId=" + encodeURIComponent(deviceId) + "&sheet=personas";
+          var resp = await reqWithTimeout(url);
+          var rows = await resp.json();
+          if (Array.isArray(rows) && rows.length){
+            var p = rows[0];
+            var persona = { temp: parseInt(p.temp,10), age: p.age, activity: p.activity, region: p.region };
+            try { localStorage.setItem(LOCAL_CACHE_KEY, JSON.stringify(persona)); } catch(e){}
+            return persona;
+          }
+          return null;
+        } catch(e){
+          try { return JSON.parse(localStorage.getItem(LOCAL_CACHE_KEY)); } catch(e2){ return null; }
+        }
+      },
+      async setPersona(deviceId, data){
+        try { localStorage.setItem(LOCAL_CACHE_KEY, JSON.stringify(data)); } catch(e){}
+        var payload = Object.assign({deviceId: deviceId}, data);
+        await upsert("personas", "deviceId", deviceId, payload);
+      },
+      async setPick(id, data){
+        var payload = Object.assign({id: id}, data);
+        await upsert("picks", "id", id, payload);
+      },
+      async queryPicks(region, dates){
+        try {
+          var url = SHEETDB_API_URL + "/search?region=" + encodeURIComponent(region) + "&sheet=picks";
+          var resp = await reqWithTimeout(url);
+          var rows = await resp.json();
+          if (!Array.isArray(rows)) return [];
+          return rows.filter(function(p){ return dates.indexOf(String(p.date)) >= 0; })
+            .map(function(p){
+              return {
+                deviceId: p.deviceId, date: p.date, region: p.region, category: p.category,
+                level: parseInt(p.level,10), temp: parseInt(p.temp,10), age: p.age,
+                activity: p.activity, feeling: p.feeling || null, updatedAt: p.updatedAt
+              };
+            });
+        } catch(e){ return []; }
+      },
       watchPicks(region, date, cb){
         this.queryPicks(region, [date]).then(cb);
         return function(){};
@@ -449,10 +580,10 @@
         } catch(e){ return null; }
       },
       async setPersona(deviceId, data){
-        try { await db.doc("personas/"+deviceId).set(data); } catch(e){ /* best-effort */ }
+        try { await db.doc("personas/"+deviceId).set(data); } catch(e){ }
       },
       async setPick(id, data){
-        try { await db.collection("picks").doc(id).set(data); } catch(e){ /* best-effort */ }
+        try { await db.collection("picks").doc(id).set(data); } catch(e){ }
       },
       async queryPicks(region, dates){
         try {
@@ -474,10 +605,11 @@
 
   var state = {
     deviceId: getDeviceId(),
-    persona: null,           // {temp, age, activity, region}
+    persona: null,
     adapter: null,
     selectedCategory: null,
-    unsubscribeToday: null
+    unsubscribeToday: null,
+    activeFilters: {} // {temp: true, age: true, activity: true, region: "안성"}
   };
 
   /* ======================= 온보딩 ======================= */
@@ -534,7 +666,6 @@
 
   function showOnboardingPrefilled(){
     initOnboardingRegionSelect();
-    wireOnboarding();
     document.getElementById("onboarding").hidden = false;
     document.getElementById("main").hidden = true;
   }
@@ -548,41 +679,113 @@
   function renderTermBanner(){
     var info = currentSolarTerm();
     var el = document.getElementById("term-banner");
+    var descShort = info.current.desc.split('.')[0];
+    var nextText = info.daysToNext<=0 ? '오늘 절기가 바뀌는 날' : info.daysToNext+'일 뒤면 '+info.next.name+'예요';
+    var allText = info.current.name+'예요 · '+descShort+' · '+nextText;
     el.innerHTML =
       '<span class="term-icon" aria-hidden="true">'+info.current.icon+'</span>'+
-      '<div>'+
-        '<p class="term-name">오늘은 <b>'+info.current.name+'</b>이에요</p>'+
-        '<p class="term-desc">'+info.current.desc+'</p>'+
-        '<p class="term-next">'+(info.daysToNext<=0 ? '오늘이 절기가 바뀌는 날이에요' : info.daysToNext+'일 뒤면 '+info.next.name+'(다음 절기)이에요')+'</p>'+
-      '</div>';
+      '<p class="term-single">'+allText+'</p>';
   }
 
-  function initRegionSelect(){
-    var sel = document.getElementById("region-select");
-    sel.innerHTML = "";
-    REGIONS.forEach(function(r){
-      var opt = document.createElement("option");
-      opt.value = r; opt.textContent = r;
-      if (r === state.persona.region) opt.selected = true;
-      sel.appendChild(opt);
+  function recommendCategory(tempC){
+    if (tempC >= 26) return CATEGORIES[0];
+    if (tempC >= 20) return CATEGORIES[1];
+    if (tempC >= 15) return CATEGORIES[2];
+    if (tempC >= 9)  return CATEGORIES[3];
+    if (tempC >= 4)  return CATEGORIES[4];
+    return CATEGORIES[5];
+  }
+
+  function fetchWeatherWithTimeout(url, ms){
+    var timeout = ms || 4000;
+    var timeoutPromise = new Promise(function(_, reject){
+      setTimeout(function(){ reject(new Error('Timeout')); }, timeout);
     });
-    sel.addEventListener("change", function(){
-      state.persona.region = sel.value;
-      state.adapter.setPersona(state.deviceId, state.persona);
-      localStorage.setItem("jamba_persona_local_v1", JSON.stringify(state.persona));
-      renderHeaderDate();
-      renderPersonaChips();
+    return Promise.race([fetch(url), timeoutPromise]);
+  }
+
+  async function getTodayWeather(region){
+    var CACHE_KEY = "jamba_weather_cache_v1";
+    var today = kstDateStr(0);
+    var cached = null;
+    try { cached = JSON.parse(localStorage.getItem(CACHE_KEY)); } catch(e){ cached = null; }
+    if (cached && cached.region === region && cached.date === today){
+      return cached;
+    }
+    var coords = REGION_COORDS[region];
+    if (!coords) return null;
+    try {
+      var url = "https://api.open-meteo.com/v1/forecast?latitude="+coords[0]+"&longitude="+coords[1]+
+        "&current=temperature_2m,weather_code&timezone=Asia%2FSeoul";
+      var resp = await fetchWeatherWithTimeout(url, 4000);
+      var data = await resp.json();
+      var temp = data.current.temperature_2m;
+      var code = data.current.weather_code;
+      var result = {region:region, date:today, temp:temp, code:code};
+      try { localStorage.setItem(CACHE_KEY, JSON.stringify(result)); } catch(e){}
+      return result;
+    } catch(e){
+      return (cached && cached.region === region) ? cached : null;
+    }
+  }
+
+  async function renderTodayStrip(){
+    var strip = document.getElementById("today-strip");
+    var weather = await getTodayWeather(state.persona.region);
+    if (!weather){
+      strip.hidden = true;
+      return;
+    }
+    var info = WEATHER_CODE_MAP[weather.code] || ["오늘 날씨",""];
+    var recoCategory = recommendCategory(weather.temp);
+    document.getElementById("weather-location").textContent = state.persona.region;
+    document.getElementById("weather-date").textContent = displayDate(kstDateStr(0));
+    document.getElementById("weather-icon").textContent = info[1] || "🌡️";
+    document.getElementById("weather-text").textContent = Math.round(weather.temp)+"°C "+info[0];
+    document.getElementById("weather-reco").textContent = recoCategory.label+" 어때요?";
+    strip.hidden = false;
+  }
+
+  function displayRegionName(){
+    var el = document.getElementById("region-display-name");
+    el.textContent = "지역: " + state.persona.region;
+  }
+
+  function renderFilterRow(){
+    var wrap = document.getElementById("filter-row");
+    wrap.innerHTML = "";
+
+    // 온도 감각
+    var tempChk = document.createElement("label");
+    tempChk.className = "filter-checkbox";
+    tempChk.innerHTML = '<input type="checkbox" id="filter-temp" checked> <label for="filter-temp">'+TEMP_LABELS[state.persona.temp]+'</label>';
+    wrap.appendChild(tempChk);
+
+    // 연령대
+    var ageChk = document.createElement("label");
+    ageChk.className = "filter-checkbox";
+    ageChk.innerHTML = '<input type="checkbox" id="filter-age" checked> <label for="filter-age">'+state.persona.age+'</label>';
+    wrap.appendChild(ageChk);
+
+    // 활동
+    var actChk = document.createElement("label");
+    actChk.className = "filter-checkbox";
+    actChk.innerHTML = '<input type="checkbox" id="filter-activity" checked> <label for="filter-activity">'+ACTIVITY_LABELS[state.persona.activity]+'</label>';
+    wrap.appendChild(actChk);
+
+    // 이벤트 연결
+    document.getElementById("filter-temp").addEventListener("change", function(){
+      state.activeFilters.temp = this.checked;
       subscribeToday();
-      loadTrend();
     });
-  }
-
-  function renderPersonaChips(){
-    var wrap = document.getElementById("persona-chips");
-    wrap.innerHTML =
-      '<span class="chip">🌡️ '+TEMP_LABELS[state.persona.temp]+'</span>'+
-      '<span class="chip">👥 '+state.persona.age+'</span>'+
-      '<span class="chip">🏃 '+ACTIVITY_LABELS[state.persona.activity]+'</span>';
+    document.getElementById("filter-age").addEventListener("change", function(){
+      state.activeFilters.age = this.checked;
+      subscribeToday();
+    });
+    document.getElementById("filter-activity").addEventListener("change", function(){
+      state.activeFilters.activity = this.checked;
+      subscribeToday();
+    });
   }
 
   function renderPickGrid(){
@@ -654,7 +857,7 @@
     });
   }
 
-  /* ---- 최근 피드백 기반 제안 배너 (로컬 기록만 사용, 규칙 기반) ---- */
+  /* ---- 최근 피드백 기반 제안 배너 ---- */
 
   async function checkSuggestion(){
     var dates = last7Dates();
@@ -695,20 +898,29 @@
       state.persona.temp = Math.max(1, Math.min(5, state.persona.temp));
       await state.adapter.setPersona(state.deviceId, state.persona);
       localStorage.setItem("jamba_persona_local_v1", JSON.stringify(state.persona));
-      renderPersonaChips();
+      renderFilterRow();
       document.getElementById("suggestion-banner").hidden = true;
       localStorage.setItem("jamba_suggestion_dismissed_"+kstDateStr(0), "1");
       subscribeToday();
     });
   }
 
-  /* ---- 오늘 통계 (실시간) ---- */
+  /* ---- 오늘 통계 (필터링) ---- */
 
   function computeDistribution(picks){
     var counts = {};
     CATEGORIES.forEach(function(c){ counts[c.id] = 0; });
     picks.forEach(function(p){ if (counts.hasOwnProperty(p.category)) counts[p.category]++; });
     return counts;
+  }
+
+  function filterPicksByActiveFilters(allPicks){
+    return allPicks.filter(function(p){
+      if (state.activeFilters.temp === false && p.temp !== state.persona.temp) return false;
+      if (state.activeFilters.age === false && p.age !== state.persona.age) return false;
+      if (state.activeFilters.activity === false && p.activity !== state.persona.activity) return false;
+      return true;
+    });
   }
 
   function renderStatsBlock(allPicks){
@@ -722,15 +934,18 @@
       return;
     }
 
-    // 나와 같은 온도 감각 우선, 부족하면 ±1, 그래도 부족하면 전체
-    var exact = allPicks.filter(function(p){ return p.temp === state.persona.temp; });
-    var near = allPicks.filter(function(p){ return Math.abs(p.temp - state.persona.temp) <= 1; });
-    var pool, tierLabel;
-    if (exact.length >= 3){ pool = exact; tierLabel = "나와 같은 온도 감각(" + TEMP_LABELS[state.persona.temp] + ")"; }
-    else if (near.length >= 3){ pool = near; tierLabel = "나와 비슷한 온도 감각"; }
-    else { pool = allPicks; tierLabel = state.persona.region + " 전체"; }
+    var pool = filterPicksByActiveFilters(allPicks);
+    var tierLabel = "필터링된 결과";
+    if (!state.activeFilters.temp && !state.activeFilters.age && !state.activeFilters.activity){
+      tierLabel = "나와 같은 온도 감각(" + TEMP_LABELS[state.persona.temp] + ")";
+    }
 
-    meta.textContent = tierLabel + " 기준 · 오늘 기록 "+pool.length+"명 (지역 전체 "+allPicks.length+"명)";
+    meta.textContent = tierLabel + " · 오늘 기록 " + pool.length + "명 (지역 전체 " + allPicks.length + "명)";
+
+    if (pool.length === 0){
+      body.innerHTML = '<p class="empty-note">이 조건에 맞는 기록이 아직 없어요.</p>';
+      return;
+    }
 
     var counts = computeDistribution(pool);
     var total = pool.length;
@@ -777,66 +992,80 @@
 
   async function loadTrend(){
     var dates = last7Dates();
-    var picks = await state.adapter.queryPicks(state.persona.region, dates);
-    var byDate = {};
-    dates.forEach(function(d){ byDate[d] = {total:0, heavy:0}; });
-    picks.forEach(function(p){
-      if (!byDate[p.date]) return;
-      byDate[p.date].total++;
-      if (p.level >= 4) byDate[p.date].heavy++;
-    });
-    renderTrend(dates, byDate);
+    renderTrend(dates, {});
   }
 
   function renderTrend(dates, byDate){
     var body = document.getElementById("trend-body");
-    var anyData = dates.some(function(d){ return byDate[d].total>0; });
-    if (!anyData){
-      body.innerHTML = '<p class="trend-empty">아직 지난 7일간 기록이 없어요. 매일 기록하면 여기에 추이가 쌓여요.</p>';
-      return;
+    body.innerHTML = "";
+
+    // 각 날짜의 날씨를 가져오기 위해 실제로는 Open-Meteo 데이터가 필요하지만,
+    // 현재 구조상 byDate에는 옷 착용 기록만 있으므로, 간단한 카드 형식으로 표시
+    var html = '<div style="display:flex;flex-direction:column;gap:8px;">';
+
+    dates.forEach(function(d){
+      var parts = d.split("-");
+      var monthDay = parseInt(parts[1],10) + "월 " + parseInt(parts[2],10) + "일";
+      html += '<div style="padding:8px;background:var(--surface-alt);border-radius:8px;font-size:12px;">';
+      html += '<div style="font-weight:700;margin-bottom:4px;">'+monthDay+'</div>';
+      html += '<div style="color:var(--ink-muted);font-size:11px;">로드 중...</div>';
+      html += '</div>';
+    });
+
+    html += '</div>';
+    body.innerHTML = html;
+
+    // 실제 날씨 데이터 로드 (백그라운드에서)
+    loadWeatherForecast(dates);
+  }
+
+  async function loadWeatherForecast(dates){
+    var coords = REGION_COORDS[state.persona.region];
+    if (!coords) return;
+
+    try {
+      var url = "https://api.open-meteo.com/v1/forecast?latitude="+coords[0]+"&longitude="+coords[1]+
+        "&daily=temperature_2m_max,temperature_2m_min,weather_code&timezone=Asia%2FSeoul&forecast_days=7";
+      var resp = await fetchWeatherWithTimeout(url, 4000);
+      var data = await resp.json();
+      renderWeatherForecast(dates, data.daily);
+    } catch(e){
+      console.error("날씨 로드 실패:", e);
     }
+  }
 
-    var w = 320, h = 160, padL = 30, padR = 12, padT = 14, padB = 24;
-    var innerW = w - padL - padR, innerH = h - padT - padB;
-    var pts = dates.map(function(d, i){
-      var pct = byDate[d].total > 0 ? (byDate[d].heavy / byDate[d].total * 100) : null;
-      var x = padL + (innerW * (i/(dates.length-1)));
-      return {x:x, pct:pct, date:d};
+  function renderWeatherForecast(dates, dailyData){
+    var body = document.getElementById("trend-body");
+    if (!dailyData || !dailyData.time) return;
+
+    var dayLabels = ["일","월","화","수","목","금","토"];
+    var html = '<div style="display:flex;gap:6px;overflow-x:auto;padding-bottom:6px;margin:0 -20px;padding-left:20px;padding-right:20px;">';
+
+    dates.forEach(function(d, idx){
+      var parts = d.split("-");
+      var year = parseInt(parts[0],10);
+      var month = parseInt(parts[1],10);
+      var day = parseInt(parts[2],10);
+      var date = new Date(year, month - 1, day);
+      var dayLabel = dayLabels[date.getDay()];
+
+      var maxTemp = dailyData.temperature_2m_max[idx];
+      var minTemp = dailyData.temperature_2m_min[idx];
+      var weatherCode = dailyData.weather_code[idx];
+      var info = WEATHER_CODE_MAP[weatherCode] || ["날씨",""];
+
+      html += '<div style="display:flex;flex-direction:column;align-items:center;gap:4px;min-width:60px;flex-shrink:0;text-align:center;">';
+      html += '<div style="font-size:11px;color:var(--ink-faint);font-weight:600;height:14px;">'+dayLabel+'</div>';
+      html += '<div style="font-size:32px;height:32px;display:flex;align-items:center;justify-content:center;">'+info[1]+'</div>';
+      html += '<div style="font-size:10px;font-weight:600;line-height:1.2;">';
+      html += '<div style="color:var(--feel-hot);">'+Math.round(maxTemp)+'°</div>';
+      html += '<div style="color:var(--feel-cold);">'+Math.round(minTemp)+'°</div>';
+      html += '</div>';
+      html += '</div>';
     });
 
-    var known = pts.filter(function(p){ return p.pct !== null; });
-    var linePts = known.map(function(p){
-      var y = padT + innerH - (innerH * (p.pct/100));
-      return p.x.toFixed(1)+","+y.toFixed(1);
-    });
-
-    var gridLines = "";
-    [0,50,100].forEach(function(v){
-      var y = padT + innerH - (innerH*(v/100));
-      gridLines += '<line x1="'+padL+'" y1="'+y+'" x2="'+(w-padR)+'" y2="'+y+'" stroke="var(--border)" stroke-width="1"/>';
-      gridLines += '<text x="'+(padL-6)+'" y="'+(y+3)+'" font-size="9" text-anchor="end" fill="var(--ink-faint)">'+v+'%</text>';
-    });
-
-    var labels = "";
-    pts.forEach(function(p,i){
-      var d = p.date.split("-");
-      labels += '<text x="'+p.x+'" y="'+(h-6)+'" font-size="9" text-anchor="middle" fill="var(--ink-faint)">'+parseInt(d[2],10)+'일</text>';
-    });
-
-    var dots = "";
-    known.forEach(function(p){
-      var y = padT + innerH - (innerH*(p.pct/100));
-      dots += '<circle cx="'+p.x+'" cy="'+y+'" r="3" fill="var(--accent)"/>';
-    });
-
-    var svg =
-      '<svg viewBox="0 0 '+w+' '+h+'" role="img" aria-label="최근 7일 두꺼운 옷 착용 비율 추이">'+
-        gridLines +
-        (linePts.length>1 ? '<polyline points="'+linePts.join(" ")+'" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>' : '') +
-        dots +
-        labels +
-      '</svg>';
-    body.innerHTML = svg;
+    html += '</div>';
+    body.innerHTML = html;
   }
 
   /* ======================= 부트스트랩 ======================= */
@@ -861,17 +1090,20 @@
   }
 
   function boostrapMain(){
-    document.getElementById("mode-label").textContent = state.adapter.mode==="real" ? "실시간 저장" : "이 기기에서 미리보기 중";
+    document.getElementById("mode-label").textContent =
+      (state.adapter.mode==="real" || state.adapter.mode==="sheetdb") ? "실시간 저장" : "이 기기에서 미리보기 중";
     renderHeaderDate();
     renderTermBanner();
-    initRegionSelect();
-    renderPersonaChips();
+    renderTodayStrip();
+    displayRegionName();
+    renderFilterRow();
     renderPickGrid();
     subscribeToday();
     loadTrend();
     checkSuggestion();
 
-    // 오늘 이미 기록했다면 선택 상태 복원
+    state.activeFilters = { temp: true, age: true, activity: true };
+
     var today = kstDateStr(0);
     state.adapter.queryPicks(state.persona.region, [today]).then(function(picks){
       var mine = picks.find ? picks.find(function(p){ return p.deviceId===state.deviceId; }) : null;
@@ -895,15 +1127,15 @@
     wireFeeling();
     wireSuggestion();
     wireEditPersona();
+    wireOnboarding();
 
-    // capability 연결 시도 (없으면 로컬 폴백)
     var db = null;
     try {
       if (window.claude && window.claude.use){
         db = await window.claude.use("db");
       }
     } catch(e){ db = null; }
-    state.adapter = db ? createRealAdapter(db) : createLocalAdapter();
+    state.adapter = db ? createRealAdapter(db) : createSheetDBAdapter();
 
     var savedPersona = await state.adapter.getPersona(state.deviceId);
     if (!savedPersona){
